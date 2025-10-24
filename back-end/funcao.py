@@ -39,4 +39,20 @@ def cadastrar_filme(titulo, genero, ano, nota):
 
 cadastrar_filme("Minha culpa", "romance e drama", 2024, 4.5)
 
+def listar_filmes():
+    conexao, cursor = conector()
+    if conexao:
+        try:
+            cursor.execute(
+                "SELECT * FROM filmes ORDER BY id"
+            )
+            return cursor.fetchall()
+        except Exception as erro:
+            print(f"Erro ao listar os filmes: {erro}")
+            return []
+        finally:
+            cursor.close()
+            conexao.close() 
+
+listar_filmes()
 
