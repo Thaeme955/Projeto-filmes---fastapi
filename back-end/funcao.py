@@ -85,5 +85,3 @@ def deletar_filmes(id):
         finally:
             cursor.close()
             conexao.close() 
-
-deletar_filmes(17,)
