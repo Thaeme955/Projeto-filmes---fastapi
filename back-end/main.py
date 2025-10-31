@@ -31,3 +31,29 @@ def listar_filmes():
             }
         )
     return {"filmes": lista}
+
+@app.delete("/filmes/{id_filme}")
+def deletar_filmes(id_filme: int):
+    filmes = funcao.buscar_filmes(id_filme)
+    if filmes:
+        funcao.deletar_filmes(id_filme)
+        return {"mensagem": "Filme excluido com sucesso!"}
+    else:
+        return{"erro": "Filme não encontrado"}
+
+
+@app.atualizar("/filme/id_filme")
+def atualizar_filmes(id_filme: int, request: request):
+    dados = request.json ()
+    titulo = dados.get("titulo")
+    genero = dados.get("genero")
+    ano = dados.get("ano")
+    nota = dados.get("nota")
+
+    filmes_existente = funcao.buscar_filme(id_filme)
+
+    if filmes_existente:
+        funcao.atualizar_filmes(id_filme, titulo, genero, ano, nota)
+        return {"mensagem": "filme atualizado com sucesso!"}
+    else:
+        return {"erro": "Filme não encontrado"}
